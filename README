@@ -1,3 +1,8 @@
 My first project in gitHub.
 
 First try to develop script for parse GOST engineering specification from DOC file.
+
+Мой первый проект на gitHub.
+Первая попытка извлечь данные из машиностроительной ГОСТовской спецификации из DOC файла.
+В планах развить проект до составления дерева спецификации, а так же создания иерархии папок с документами в соответсвии
+с деревом.
