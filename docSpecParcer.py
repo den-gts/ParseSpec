@@ -170,7 +170,3 @@ def parseDoc(DocFile=u'D:\\project\\python\\com\\СКИД.461411.001 АРК.doc'
 
 if __name__=='__main__':
 
-    spec=DocSpecification()
-
-    for key in spec.section[spec.SECTION_NAMES.PARTS]:
-            print key
