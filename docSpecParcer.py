@@ -169,4 +169,4 @@ def parseDoc(DocFile=u'D:\\project\\python\\com\\СКИД.461411.001 АРК.doc'
     return rows
 
 if __name__=='__main__':
-
+    parseDoc()
