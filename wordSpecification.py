@@ -1,5 +1,5 @@
 # -*-coding: utf-8 -*-
-import pywintypes,win32com.client
+import pywintypes,win32com.client,logging
 from lxml import etree
 class WordSpecification:
     def __init__(self,fileName):
@@ -62,8 +62,10 @@ class WordSpecification:
         for column in range(columnNames['lastColumn']):
             result.append(self.getCell(table,row,column))
         return result
+
     def getRawRows(self):#возвращает сырые строки
         return self.__funcRow(self.__rawRow)
+
     def __rwParceToXML(self,row,table,columnNames,**kwarg):#парсит отдельную строку
         #вытаскиваем сырую строку из док файла
         row=self.__rawRow(row,table,columnNames)#сырая строка
@@ -71,15 +73,31 @@ class WordSpecification:
         ColNamesWithoutLast.pop('lastColumn')
         row={key:row[value] for key,value in ColNamesWithoutLast.items() }#формируем новый словарь для краткости
 
-        elemText=row['Name']#вытаскиваем значение колонки "Наименование"
-        etree.SubElement(kwarg['parent'],"element").text=elemText
+        #собираем строку. Если многострочный элемент, объеденяем в соответсвии с условиями
+        #вытаскиваем значение колонки "Наименование" и кладем в буффер до условия новой строки
+        if not row['Name'] and not kwarg['lstBuffer']:return
+        if not row['Name']:
+            #обнаружена пустая строка - записываем стек в элемент XML и очищаем стек и выходим из функции
+            etree.SubElement(kwarg['parent'],"element").text="".join(kwarg['lstBuffer']).replace("- ","")
+            del kwarg['lstBuffer'][:]
+            return
+
+
+        kwarg['lstBuffer'].append("%s%s"%(" ",row['Name']))#условий нового элемента ненайдено. Пополняем стек
+
+
+
     def getXML(self):#функция парсинга документа в XML
         root=etree.Element("specification")#корневой элемент XML
         section=root#пока будет один раздел - кореневой
-        self.__funcRow(self.__rwParceToXML,parent=section)#запускаем функцию обработки строк
+        self.__funcRow(self.__rwParceToXML,parent=section,lstBuffer=list(),defis=False)#запускаем функцию обработки строк
         return etree.tostring(section,pretty_print=True,encoding='utf-8', xml_declaration=True)
 
+
+
 if __name__=='__main__':
+    logging.basicConfig(level=logging.DEBUG,filename='f:\\log',filemode="w")
+
     Wspec=WordSpecification(u'D:\\project\\python\\com\\СКИД.461411.001 АРК.doc')
     print Wspec.getXML()
 
