@@ -75,28 +75,51 @@ class WordSpecification:
 
         #собираем строку. Если многострочный элемент, объеденяем в соответсвии с условиями
         #вытаскиваем значение колонки "Наименование" и кладем в буффер до условия новой строки
-        if not row['Name'] and not kwarg['lstBuffer']:return
+        if not row['Name'] and not kwarg['lstBuffer']:return#игнорируем пустые строки
+
+
+        lstParentLstbuffer=(kwarg['parent'],kwarg['lstBuffer'],kwarg['dicAttrib'])
         if not row['Name']:
+
             #обнаружена пустая строка - записываем стек в элемент XML и очищаем стек и выходим из функции
-            etree.SubElement(kwarg['parent'],"element").text="".join(kwarg['lstBuffer']).replace("- ","")
-            del kwarg['lstBuffer'][:]
+            self.__addXMLelement(*lstParentLstbuffer)
+
             return
-
-
+        #добавляем элемент в XML если встречаем признак нового эдемента - позицию или обозначение
+        #и заносим текющее наименоваине в буфер
+        if (row['Position'] or row['Description']) and kwarg['lstBuffer']:
+            self.__addXMLelement(*lstParentLstbuffer)
+        #если новый элемент, то формируем словарь аргументов.
+        #аргументы определяются в первой строке элемента. Обозначение, позиция и.т.п.
+        # Пустые атрибуты и наименование нам не нужны
+        #TODO а если поле примечание многострочное?
+        if not kwarg['dicAttrib']:
+            kwarg['dicAttrib'].update({atr:row[atr] for atr in row.keys() if (row[atr] and  atr!='Name')})
+        #TODO написать регулярку для добавления точки в тексте в случаях подобных:Руководство по эксплуатации Лист утверждения
         kwarg['lstBuffer'].append("%s%s"%(" ",row['Name']))#условий нового элемента ненайдено. Пополняем стек
+
+
+    def __addXMLelement(self,parent,lstBuffer,dicAttrib):
+
+        #и наконец добавляем буффер с атрибутами в дерево XML, попутно удаляя дефисы и склеивая строки
+        etree.SubElement(parent,"element",attrib=dicAttrib).text="".join(lstBuffer).replace("- ","")
+        #чистим буфер и словарь для нового элемента
+        del lstBuffer[:]
+        dicAttrib.clear()
+
 
 
 
     def getXML(self):#функция парсинга документа в XML
         root=etree.Element("specification")#корневой элемент XML
         section=root#пока будет один раздел - кореневой
-        self.__funcRow(self.__rwParceToXML,parent=section,lstBuffer=list(),defis=False)#запускаем функцию обработки строк
+        self.__funcRow(self.__rwParceToXML,parent=section,lstBuffer=list(),dicAttrib=dict())#запускаем функцию обработки строк
         return etree.tostring(section,pretty_print=True,encoding='utf-8', xml_declaration=True)
 
 
 
 if __name__=='__main__':
-    logging.basicConfig(level=logging.DEBUG,filename='f:\\log',filemode="w")
+    logging.basicConfig(level=logging.DEBUG)#filename='f:\\log',filemode="w")
 
     Wspec=WordSpecification(u'D:\\project\\python\\com\\СКИД.461411.001 АРК.doc')
     print Wspec.getXML()
