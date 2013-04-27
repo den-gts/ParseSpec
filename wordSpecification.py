@@ -92,7 +92,7 @@ class WordSpecification:
         #если новый элемент, то формируем словарь аргументов.
         #аргументы определяются в первой строке элемента. Обозначение, позиция и.т.п.
         # Пустые атрибуты и наименование нам не нужны
-        #TODO а если поле примечание многострочное?
+        #TODO а если поле "примечание" многострочное?
         if not kwarg['dicAttrib']:
             kwarg['dicAttrib'].update({atr:row[atr] for atr in row.keys() if (row[atr] and  atr!='Name')})
         #TODO написать регулярку для добавления точки в тексте в случаях подобных:Руководство по эксплуатации Лист утверждения
@@ -101,13 +101,14 @@ class WordSpecification:
 
     def __addXMLelement(self,parent,lstBuffer,dicAttrib):
 
-        #и наконец добавляем буффер с атрибутами в дерево XML, попутно удаляя дефисы и склеивая строки
-        etree.SubElement(parent,"element",attrib=dicAttrib).text="".join(lstBuffer).replace("- ","")
+        #и наконец добавляем буффер с атрибутами в дерево XML
+        element=etree.SubElement(parent,"element",attrib=dicAttrib)
+        #, попутно удаляя дефисы и склеивая строки
+        element.text="".join(lstBuffer).replace("- ","")
         #чистим буфер и словарь для нового элемента
         del lstBuffer[:]
         dicAttrib.clear()
-
-
+        logging.debug(element)
 
 
     def getXML(self):#функция парсинга документа в XML

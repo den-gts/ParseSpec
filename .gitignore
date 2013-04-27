@@ -6,3 +6,9 @@
 /logg.py
 /wordSpecification.py
 /out.html
+/wordSpecParcer.py
+/buildOutput.py
+/docSpecParcer.py
+/settings.py
+/structure.html
+/testinput.txt
