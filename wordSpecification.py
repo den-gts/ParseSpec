@@ -76,12 +76,15 @@ class WordSpecification:
         #собираем строку. Если многострочный элемент, объеденяем в соответсвии с условиями
         #вытаскиваем значение колонки "Наименование" и кладем в буффер до условия новой строки
         if not row['Name'] and not kwarg['lstBuffer']:return#игнорируем пустые строки
+        #TODO доделать обработку разделов
+        if row['Name']==u"Сборочные единицы":
+            self.__section=etree.SubElement(self.__section,"Assamblys")
+            return
 
-
-        lstParentLstbuffer=(kwarg['parent'],kwarg['lstBuffer'],kwarg['dicColumns'])
+        lstParentLstbuffer=(self.__section,kwarg['lstBuffer'],kwarg['dicColumns'])
         if not row['Name']:
 
-            #обнаружена пустая строка - записываем стек в элемент XML и очищаем стек и выходим из функции
+            #обнаружена пустая строка - записываем буффер в элемент XML,очищаем буффер и выходим из функции
             self.__addXMLelement(*lstParentLstbuffer)
 
             return
@@ -99,25 +102,29 @@ class WordSpecification:
         kwarg['lstBuffer'].append("%s%s"%(" ",row['Name']))#условий нового элемента ненайдено. Пополняем стек
 
 
-    def __addXMLelement(self,parent,lstBuffer,dicColumns):
+    def __addXMLelement(self,parent,lstBuffer=None,dicColumns=None):
 
         #и наконец добавляем буффер с атрибутами в дерево XML
         element=etree.SubElement(parent,"element")
-        for columnName,columnValue in dicColumns.items():
-            etree.SubElement(element,columnName).text=columnValue
-        #, попутно удаляя дефисы и склеивая строки
-        etree.SubElement(element,"Name").text="".join(lstBuffer).replace("- ","")
-        #чистим буфер и словарь для нового элемента
-        del lstBuffer[:]
-        dicColumns.clear()
+        if dicColumns:
+            for columnName,columnValue in dicColumns.items():
+                etree.SubElement(element,columnName).text=columnValue
+                #чистим словарь для нового элемента
+                dicColumns.clear()
+
+        if lstBuffer:#, попутно удаляя дефисы и склеивая строки
+            etree.SubElement(element,"Name").text="".join(lstBuffer).replace("- ","")
+            #чистим буфер
+            del lstBuffer[:]
+
 
 
 
     def getXML(self):#функция парсинга документа в XML
         root=etree.Element("specification")#корневой элемент XML
-        section=root#пока будет один раздел - кореневой
-        self.__funcRow(self.__rwParceToXML,parent=section,lstBuffer=list(),dicColumns=dict())#запускаем функцию обработки строк
-        return etree.tostring(section,pretty_print=True,encoding='utf-8', xml_declaration=True)
+        self.__section=root#пока будет один раздел - кореневой
+        self.__funcRow(self.__rwParceToXML,lstBuffer=list(),dicColumns=dict())#запускаем функцию обработки строк
+        return etree.tostring(root,pretty_print=True,encoding='utf-8', xml_declaration=True)
 
 
 
