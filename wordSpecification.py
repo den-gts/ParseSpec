@@ -78,7 +78,7 @@ class WordSpecification:
         if not row['Name'] and not kwarg['lstBuffer']:return#игнорируем пустые строки
 
 
-        lstParentLstbuffer=(kwarg['parent'],kwarg['lstBuffer'],kwarg['dicAttrib'])
+        lstParentLstbuffer=(kwarg['parent'],kwarg['lstBuffer'],kwarg['dicColumns'])
         if not row['Name']:
 
             #обнаружена пустая строка - записываем стек в элемент XML и очищаем стек и выходим из функции
@@ -89,32 +89,34 @@ class WordSpecification:
         #и заносим текющее наименоваине в буфер
         if (row['Position'] or row['Description']) and kwarg['lstBuffer']:
             self.__addXMLelement(*lstParentLstbuffer)
-        #если новый элемент, то формируем словарь аргументов.
-        #аргументы определяются в первой строке элемента. Обозначение, позиция и.т.п.
-        # Пустые атрибуты и наименование нам не нужны
+        #если новый элемент, то формируем словарь значений столбцов.
+        #значения столбцов определяются в первой строке элемента. Обозначение, позиция и.т.п.
+        # Пустые значения и наименование нам не нужны
         #TODO а если поле "примечание" многострочное?
-        if not kwarg['dicAttrib']:
-            kwarg['dicAttrib'].update({atr:row[atr] for atr in row.keys() if (row[atr] and  atr!='Name')})
+        if not kwarg['dicColumns']:
+            kwarg['dicColumns'].update({atr:row[atr] for atr in row.keys() if (row[atr] and  atr!='Name')})
         #TODO написать регулярку для добавления точки в тексте в случаях подобных:Руководство по эксплуатации Лист утверждения
         kwarg['lstBuffer'].append("%s%s"%(" ",row['Name']))#условий нового элемента ненайдено. Пополняем стек
 
 
-    def __addXMLelement(self,parent,lstBuffer,dicAttrib):
+    def __addXMLelement(self,parent,lstBuffer,dicColumns):
 
         #и наконец добавляем буффер с атрибутами в дерево XML
-        element=etree.SubElement(parent,"element",attrib=dicAttrib)
+        element=etree.SubElement(parent,"element")
+        for columnName,columnValue in dicColumns.items():
+            etree.SubElement(element,columnName).text=columnValue
         #, попутно удаляя дефисы и склеивая строки
-        element.text="".join(lstBuffer).replace("- ","")
+        etree.SubElement(element,"Name").text="".join(lstBuffer).replace("- ","")
         #чистим буфер и словарь для нового элемента
         del lstBuffer[:]
-        dicAttrib.clear()
-        logging.debug(element)
+        dicColumns.clear()
+
 
 
     def getXML(self):#функция парсинга документа в XML
         root=etree.Element("specification")#корневой элемент XML
         section=root#пока будет один раздел - кореневой
-        self.__funcRow(self.__rwParceToXML,parent=section,lstBuffer=list(),dicAttrib=dict())#запускаем функцию обработки строк
+        self.__funcRow(self.__rwParceToXML,parent=section,lstBuffer=list(),dicColumns=dict())#запускаем функцию обработки строк
         return etree.tostring(section,pretty_print=True,encoding='utf-8', xml_declaration=True)
 
 
