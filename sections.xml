@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+      <section>
+               <name>Документация</name>
+               <regExp>[Дд]окументация\.?</regExp>
+      </section>
+      <section>
+               <name>Сборочные единицы</name>
+               <regExp>[Сс]борочные\s+ед[ие]ницы\.?</regExp>
+      </section>
+      <section>
+               <name>Детали</name>
+               <regExp>[Дд]етали\.?</regExp>
+      </section>
+      <section>
+               <name>Стандартные изделия</name>
+               <regExp>[CcСс]тандартные\s+изделия\.?</regExp>
+      </section>
+      <section>
+               <name>Прочие изделия</name>
+               <regExp>[Пп]рочие\s+изделия\.?</regExp>
+      </section>
+      <section>
+        <name>Комплекты</name>
+        <regExp>[KkКк][ао]мплекты\.?</regExp>
+      </section>
+      <section>
+               <name>устанавливают по </name>
+               <regExp/>
+               <section>
+                        <name>Документация</name>
+                        <regExp>документация</regExp>
+               </section>
+      </section>
+
+</root>
+
+
+
+
+
+
