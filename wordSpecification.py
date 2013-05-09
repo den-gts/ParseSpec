@@ -14,8 +14,6 @@ class WordSpecification:
         self.__word.Visible=0
         self.__wdoc=self.__word.Documents.Open(fileName)
 
-
-
     def getCell(self,table,row,col):
         result=unicode(table.Cell(row,col).Range.Text)[:-2].strip()
         return result
@@ -39,7 +37,6 @@ class WordSpecification:
 
     def __RawCol(self,row,table,columnNames,col):#функция вывода сырого столбца без обработки
             return self.getCell(table,row,columnNames[col])
-
 
     def __del__(self):
         self.__wdoc.Close(False)
@@ -83,28 +80,22 @@ class WordSpecification:
         #TODO доделать обработку разделов
         ##если имя совпадает с выражением раздела, то добавляем новый раздел
         sections=Sections()
-
         sectionName=sections.compareSection(row['Name'])
         if sectionName or (row['Name'] and table.Cell(rowNumber,self.__columnNames['Name']).Range.Font.Underline):
-            #обнаружено начало нового раздела. Добавляем буффер прошлого элемента если не пуст
-            self.__addXMLelement(*lstParentLstbuffer)
-            self.__section=self.root
-            self.__section=etree.SubElement(self.__section,"section")
-            if not sectionName:
-                sectionName=row['Name']
-            etree.SubElement(self.__section,'name').text=sectionName
+        #обнаружено начало нового раздела. Добавляем буффер прошлого элемента если не пуст
+            self.addXMLelement(*lstParentLstbuffer)
+            self.addSection(sectionName,row['Name'])
             return
 
         if not row['Name']:
-
             #обнаружена пустая строка - записываем буффер в элемент XML,очищаем буффер и выходим из функции
-            self.__addXMLelement(*lstParentLstbuffer)
+            self.addXMLelement(*lstParentLstbuffer)
 
             return
         #добавляем элемент в XML если встречаем признак нового эдемента - позицию или обозначение
         #и заносим текющее наименоваине в буфер
         if (row['Position'] or row['Description']) and kwarg['lstBuffer']:
-            self.__addXMLelement(*lstParentLstbuffer)
+            self.addXMLelement(*lstParentLstbuffer)
         #если новый элемент, то формируем словарь значений столбцов.
         #значения столбцов определяются в первой строке элемента. Обозначение, позиция и.т.п.
         # Пустые значения и наименование нам не нужны
@@ -115,7 +106,7 @@ class WordSpecification:
         kwarg['lstBuffer'].append("%s%s"%(" ",row['Name']))#условий нового элемента ненайдено. Пополняем стек
 
 
-    def __addXMLelement(self,parent,lstBuffer=None,dicColumns=None):
+    def addXMLelement(self,parent,lstBuffer=None,dicColumns=None):
         element=None
         #и наконец добавляем буффер с атрибутами в дерево XML
         if lstBuffer or dicColumns:
@@ -131,8 +122,12 @@ class WordSpecification:
             #чистим буфер
             del lstBuffer[:]
 
-
-
+    def addSection(self,sectionName,defaultSectionName="раздел без имени"):
+        self.__section=self.root
+        self.__section=etree.SubElement(self.__section,"section")
+        if not sectionName:
+            sectionName=defaultSectionName
+        etree.SubElement(self.__section,'name').text=sectionName
 
     def getXML(self):#функция парсинга документа в XML
         root=etree.Element("specification")#корневой элемент XML
