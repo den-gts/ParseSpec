@@ -1,6 +1,8 @@
 # -*-coding: utf-8 -*-
 import pywintypes,win32com.client,logging
 from lxml import etree
+from settings import Sections
+
 class WordSpecification:
     def __init__(self,fileName):
         self.__Headers={
@@ -77,8 +79,15 @@ class WordSpecification:
         #вытаскиваем значение колонки "Наименование" и кладем в буффер до условия новой строки
         if not row['Name'] and not kwarg['lstBuffer']:return#игнорируем пустые строки
         #TODO доделать обработку разделов
-        if row['Name']==u"Сборочные единицы":
-            self.__section=etree.SubElement(self.__section,"Assamblys")
+        ##если имя совпадает с выражением раздела, то добавляем новый раздел
+        sections=Sections()
+        sectionName=sections.compareSection(row['Name'])
+
+        if sectionName:
+            self.__section=self.root
+            self.__section=etree.SubElement(self.__section,"section")
+            etree.SubElement(self.__section,'name').text=sectionName
+
             return
 
         lstParentLstbuffer=(self.__section,kwarg['lstBuffer'],kwarg['dicColumns'])
@@ -122,7 +131,8 @@ class WordSpecification:
 
     def getXML(self):#функция парсинга документа в XML
         root=etree.Element("specification")#корневой элемент XML
-        self.__section=root#пока будет один раздел - кореневой
+        self.root=root
+        self.__section=root#текущий раздел корень
         self.__funcRow(self.__rwParceToXML,lstBuffer=list(),dicColumns=dict())#запускаем функцию обработки строк
         return etree.tostring(root,pretty_print=True,encoding='utf-8', xml_declaration=True)
 
@@ -132,6 +142,7 @@ if __name__=='__main__':
     logging.basicConfig(level=logging.DEBUG)#filename='f:\\log',filemode="w")
 
     Wspec=WordSpecification(u'D:\\project\\python\\com\\СКИД.461411.001 АРК.doc')
-    print Wspec.getXML()
-
+    xmlfile=open('output.xml','w')
+    xmlfile.write(Wspec.getXML())
+    xmlfile.close()
 
