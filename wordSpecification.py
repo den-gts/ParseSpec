@@ -1,5 +1,5 @@
 # -*-coding: utf-8 -*-
-import pywintypes,win32com.client,logging
+import pywintypes,win32com.client,logging,os
 from lxml import etree
 from settings import Sections
 
@@ -141,7 +141,7 @@ class WordSpecification:
 if __name__=='__main__':
     logging.basicConfig(level=logging.DEBUG)#filename='f:\\log',filemode="w")
 
-    Wspec=WordSpecification(u'D:\\project\\python\\com\\СКИД.461411.001 АРК.doc')
+    Wspec=WordSpecification(u'%s\\СКИД.461411.001 АРК.doc'%os.getcwd())
     xmlfile=open('output.xml','w')
     xmlfile.write(Wspec.getXML())
     xmlfile.close()
