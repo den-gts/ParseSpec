@@ -17,7 +17,8 @@ class WordSpecification:
 
 
     def getCell(self,table,row,col):
-        return unicode(table.Cell(row,col).Range.Text)[:-2].strip()
+        result=unicode(table.Cell(row,col).Range.Text)[:-2].strip()
+        return result
 
     def getColumnNames(self,table):
         currentIndex=1
@@ -46,51 +47,54 @@ class WordSpecification:
     def __funcRow(self,funct,**kwargs):#унифицированная функция-обертка для манипуляций над строкой
         result=[]
         for table in self.__wdoc.Tables:
-            columnNames=self.getColumnNames(table)
+            self.__columnNames=self.getColumnNames(table)
 
             for row in range(2,40):
                 try:
-                    result.append(funct(row,table,columnNames,**kwargs))
+                    result.append(funct(row,table,**kwargs))
                 except KeyError,er:
                     pass
                 except pywintypes.com_error,er:
                 #print "error: "+er[2][2]
                     break
         return result
-    def rawCol(self,col='Name'):#обертка для функции вывода сырого столбца
+    def rawCol(self):#обертка для функции вывода сырого столбца
         return self.__funcRow(self.__RawCol,col="Name")
-    def __rawRow(self,row,table,columnNames):#функция вывода сырой строки
+    def __rawRow(self,row,table):#функция вывода сырой строки
         result=[]
-        for column in range(columnNames['lastColumn']):
+        for column in range(self.__columnNames['lastColumn']):
             result.append(self.getCell(table,row,column))
         return result
 
     def getRawRows(self):#возвращает сырые строки
         return self.__funcRow(self.__rawRow)
 
-    def __rwParceToXML(self,row,table,columnNames,**kwarg):#парсит отдельную строку
+    def __rwParceToXML(self,rowNumber,table,**kwarg):#парсит отдельную строку
         #вытаскиваем сырую строку из док файла
-        row=self.__rawRow(row,table,columnNames)#сырая строка
-        ColNamesWithoutLast=columnNames.copy()#TODO костылечек с удалением lastColumn из словаря имен колонок
+        row=self.__rawRow(rowNumber,table)#сырая строка
+        ColNamesWithoutLast=self.__columnNames.copy()#TODO костылечек с удалением lastColumn из словаря имен колонок
         ColNamesWithoutLast.pop('lastColumn')
         row={key:row[value] for key,value in ColNamesWithoutLast.items() }#формируем новый словарь для краткости
 
         #собираем строку. Если многострочный элемент, объеденяем в соответсвии с условиями
         #вытаскиваем значение колонки "Наименование" и кладем в буффер до условия новой строки
         if not row['Name'] and not kwarg['lstBuffer']:return#игнорируем пустые строки
+        lstParentLstbuffer=(self.__section,kwarg['lstBuffer'],kwarg['dicColumns'])
         #TODO доделать обработку разделов
         ##если имя совпадает с выражением раздела, то добавляем новый раздел
         sections=Sections()
-        sectionName=sections.compareSection(row['Name'])
 
-        if sectionName:
+        sectionName=sections.compareSection(row['Name'])
+        if sectionName or (row['Name'] and table.Cell(rowNumber,self.__columnNames['Name']).Range.Font.Underline):
+            #обнаружено начало нового раздела. Добавляем буффер прошлого элемента если не пуст
+            self.__addXMLelement(*lstParentLstbuffer)
             self.__section=self.root
             self.__section=etree.SubElement(self.__section,"section")
+            if not sectionName:
+                sectionName=row['Name']
             etree.SubElement(self.__section,'name').text=sectionName
-
             return
 
-        lstParentLstbuffer=(self.__section,kwarg['lstBuffer'],kwarg['dicColumns'])
         if not row['Name']:
 
             #обнаружена пустая строка - записываем буффер в элемент XML,очищаем буффер и выходим из функции
@@ -112,16 +116,17 @@ class WordSpecification:
 
 
     def __addXMLelement(self,parent,lstBuffer=None,dicColumns=None):
-
+        element=None
         #и наконец добавляем буффер с атрибутами в дерево XML
-        element=etree.SubElement(parent,"element")
-        if dicColumns:
-            for columnName,columnValue in dicColumns.items():
-                etree.SubElement(element,columnName).text=columnValue
-                #чистим словарь для нового элемента
-                dicColumns.clear()
+        if lstBuffer or dicColumns:
+            element=etree.SubElement(parent,"element")
+            if dicColumns:
+                for columnName,columnValue in dicColumns.items():
+                    etree.SubElement(element,columnName).text=columnValue
+                    #чистим словарь для нового элемента
+                    dicColumns.clear()
 
-        if lstBuffer:#, попутно удаляя дефисы и склеивая строки
+            #, попутно удаляя дефисы и склеивая строки
             etree.SubElement(element,"Name").text="".join(lstBuffer).replace("- ","")
             #чистим буфер
             del lstBuffer[:]
