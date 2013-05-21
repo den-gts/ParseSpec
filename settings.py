@@ -4,6 +4,7 @@ from lxml import etree
 class Sections():
     def __init__(self,root=etree.parse('sections.xml')):
         self.root=root
+
     def compareSection(self,cmpString):
         for regExp in self.root.xpath('./section[name][regExp]/regExp'):
             if regExp.text:
@@ -11,7 +12,7 @@ class Sections():
                 if re.match(regExpPattern,cmpString):
                     #return regExp.xpath('..')[0]
                     return regExp.xpath('../name')[0].text
-
+STANDART_SECTION_NAME=u'Стандартные изделия'
 if __name__=='__main__':
     sect=Sections()
     print type(sect.compareSection(u"детали"))
