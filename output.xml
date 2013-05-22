@@ -1,0 +1,535 @@
+<?xml version='1.0' encoding='utf-8'?>
+<specification>
+  <section>
+    <name>Документация</name>
+    <element>
+      <Description>СКИД.461411.001 СБ</Description>
+      <Name> Сборочный чертёж</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ГЧ</Description>
+      <Name> Габаритный чертёж</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 Е1</Description>
+      <Name> Схема деления изделия на составные части</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ВО</Description>
+      <Name> Чертеж общего вида</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ВС</Description>
+      <Name> Ведомость спецификаций</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 Э1</Description>
+      <Name> Схема электрическая структурная</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ВЭ</Description>
+      <Name> Ведомость эксплуатационных документов</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ЗИ</Description>
+      <Name> Ведомость ЗИП-О</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 НЗЧ</Description>
+      <Name> Нормы расхода запасных частей на период эксплуатации</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 НМ</Description>
+      <Name> Нормы расхода материалов на период эксплуатации</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 РЭ</Description>
+      <Name> Руководство по эксплуатации</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 РЭ-ЛУ</Description>
+      <Name> Руководство по эксплуатации Лист утверждения</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ФО</Description>
+      <Name> Формуляр</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ФО-ЛУ</Description>
+      <Name> Формуляр Лист утверждения</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ВП</Description>
+      <Name> Ведомость покупных изделий</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ТУ</Description>
+      <Name> Технические условия</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ТУ-ЛУ</Description>
+      <Name> Технические условия Лист утверждения</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 РР1</Description>
+      <Name> Расчёт надежности</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 РР2</Description>
+      <Name> Расчёт уровня стандартизации и унификации</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 ПМ</Description>
+      <Name> Программа и методика испытаний</Name>
+    </element>
+    <element>
+      <Description>СКИД.461411.001 И8</Description>
+      <Name> Инструкция по консервации хранению и упаковке</Name>
+    </element>
+  </section>
+  <section>
+    <name>Сборочные единицы</name>
+    <element>
+      <Position>1</Position>
+      <Description>СКИД.301561.019</Description>
+      <Name> Кронштейн</Name>
+    </element>
+    <element>
+      <Position>3</Position>
+      <Description>СКИД.301561.020</Description>
+      <Name> Кронштейн</Name>
+    </element>
+    <element>
+      <Position>8</Position>
+      <Description>СКИД.301318.025</Description>
+      <Name> Переходник</Name>
+    </element>
+    <element>
+      <Position>10</Position>
+      <Description>СКИД.301319.025</Description>
+      <Name> Базовый транспортный модуль А-РК</Name>
+    </element>
+    <element>
+      <Position>12</Position>
+      <Description>СКИД.301524.025</Description>
+      <Name> Держатель</Name>
+    </element>
+    <element>
+      <Position>30</Position>
+      <Description>СКИД.304242.005</Description>
+      <Name> Устройство амортизационное</Name>
+    </element>
+    <element>
+      <Position>31</Position>
+      <Description>СКИД.304242.006</Description>
+      <Name> Устройство амортизационное</Name>
+    </element>
+    <element>
+      <Position>35</Position>
+      <Description>СКИД.304242.008</Description>
+      <Name> Устройство амортизационное</Name>
+    </element>
+    <element>
+      <Position>41</Position>
+      <Description>СКИД.321225.001</Description>
+      <Name> Кейс</Name>
+    </element>
+  </section>
+  <section>
+    <name>Детали</name>
+    <element>
+      <Position>55</Position>
+      <Description>СКИД.713141.029</Description>
+      <Name> Втулка</Name>
+    </element>
+  </section>
+  <section>
+    <name>Стандартные изделия</name>
+    <element>
+      <Name> Болты ГОСТ 7805-70</Name>
+    </element>
+    <element>
+      <Position>111</Position>
+      <Name> М6-6gх35.36.019</Name>
+    </element>
+    <element>
+      <Position>112</Position>
+      <Name> М6-6gх50.36.019</Name>
+    </element>
+    <element>
+      <Position>113</Position>
+      <Name> М6-6gх70.36.019</Name>
+    </element>
+    <element>
+      <Position>115</Position>
+      <Name> М8-6gх50.36.019</Name>
+    </element>
+    <element>
+      <Position>123</Position>
+      <Name> М10-6gх40.36.019</Name>
+    </element>
+    <element>
+      <Position>135</Position>
+      <Name> Винт самонарезающий 1-5х30.01.016ГОСТ 11652-80</Name>
+    </element>
+    <element>
+      <Position>141</Position>
+      <Name> Гайка М6-6Н.6.019 ГОСТ 5927-70</Name>
+    </element>
+    <element>
+      <Name> Шайбы ГОСТ 6402-70</Name>
+    </element>
+    <element>
+      <Position>151</Position>
+      <Name> 6 65Г 019</Name>
+    </element>
+    <element>
+      <Position>155</Position>
+      <Name> 10 65Г 019</Name>
+    </element>
+    <element>
+      <Name> Шайбы ГОСТ 11371-78</Name>
+    </element>
+    <element>
+      <Position>161</Position>
+      <Name> С.6.04. 019</Name>
+    </element>
+    <element>
+      <Position>165</Position>
+      <Name> С.10.04. 019</Name>
+    </element>
+    <element>
+      <Name> Шуруп ГОСТ 1144-80</Name>
+    </element>
+    <element>
+      <Position>171</Position>
+      <Name> 3-4х35.016</Name>
+    </element>
+  </section>
+  <section>
+    <name>Прочие изделия</name>
+    <element>
+      <Position>191</Position>
+      <Description>6ЛО.445.000ТУ</Description>
+      <Name> Амортизатор АПН-3</Name>
+    </element>
+    <element>
+      <Position>201</Position>
+      <Name> Ноутбук Fujitsu-Siemens</Name>
+    </element>
+    <element>
+      <Position>203</Position>
+      <Description>ИУПЯ.466964.001</Description>
+      <Name> Измеритель потери достоверности ИПД</Name>
+    </element>
+    <element>
+      <Position>205</Position>
+      <Name> УПА-18</Name>
+    </element>
+    <element>
+      <Position>207</Position>
+      <Name> Анализатор спектра Agilent E4446A</Name>
+    </element>
+    <element>
+      <Position>209</Position>
+      <Name> Генератор сигналов N6030A</Name>
+    </element>
+    <element>
+      <Position>211</Position>
+      <Name> Генератор СВЧ Agilent E8267D PSG</Name>
+    </element>
+    <element>
+      <Position>213</Position>
+      <Name> Регулируемый аттенюатор аттенюатор (500 Вт, 0-40 дБ)</Name>
+    </element>
+    <element>
+      <Position>215</Position>
+      <Name> Комплект измерительных антенн в составе: ETS-Lindgren 3301B (1 шт.) ETS-Lindgren 3140B (1 шт.) ETS-Lindgren 3115 (1 шт.) ETS-Lindgren 3116 (1 шт.)</Name>
+    </element>
+    <element>
+      <Position>231</Position>
+      <Description>ИТНЯ.464511.028-07</Description>
+      <Name> Радиостанция Р-168-5УН(1)</Name>
+    </element>
+    <element>
+      <Position>233</Position>
+      <Description>ИТНЯ.464425.033</Description>
+      <Name> Радиостанция Р-168  МР-А</Name>
+    </element>
+    <element>
+      <Position>235</Position>
+      <Description>ИТНЯ.468732.323</Description>
+      <Name> Усилитель МР-А</Name>
+    </element>
+    <element>
+      <Position>237</Position>
+      <Name> Кабель П-274М (500м)</Name>
+    </element>
+    <element>
+      <Position>239</Position>
+      <Description>ТУ16.К99-014-2004</Description>
+      <Name> Кабель "витая пара" кат. 5 с разъемами</Name>
+    </element>
+    <element>
+      <Position>240</Position>
+      <Description>РГ2.180.021 ТУ</Description>
+      <Name> Телефонный аппарат ТА-88</Name>
+    </element>
+    <element>
+      <Position>241</Position>
+      <Description>ШКИС.304332.005</Description>
+      <Name> Катушка</Name>
+    </element>
+    <element>
+      <Position>242</Position>
+      <Description>ШКИС.304551.001</Description>
+      <Name> Станок намоточный</Name>
+    </element>
+    <element>
+      <Position>243</Position>
+      <Description>ШКИС.685691.074</Description>
+      <Name> Жгут</Name>
+    </element>
+    <element>
+      <Position>244</Position>
+      <Description>ШКИС.685691.075</Description>
+      <Name> Жгут</Name>
+    </element>
+    <element>
+      <Position>245</Position>
+      <Name> Комплект антенн Р-168-5УТ(1)</Name>
+    </element>
+    <element>
+      <Position>246</Position>
+      <Name> Антенна А112</Name>
+    </element>
+    <element>
+      <Position>247</Position>
+      <Name> Антенна А114</Name>
+    </element>
+    <element>
+      <Position>248</Position>
+      <Name> Антенна А115</Name>
+    </element>
+    <element>
+      <Position>249</Position>
+      <Description>ИТНЯ.464659.031</Description>
+      <Name> Антенна АБ</Name>
+    </element>
+    <element>
+      <Position>250</Position>
+      <Description>ИТНЯ.464657.025</Description>
+      <Name> Антенна КР</Name>
+    </element>
+    <element>
+      <Position>251</Position>
+      <Name> Антенна направленная МР-А</Name>
+    </element>
+    <element>
+      <Position>253</Position>
+      <Description>ИТНЯ.301317.007-01</Description>
+      <Name> Мачта Р-168МК</Name>
+    </element>
+    <element>
+      <Position>254</Position>
+      <Description>ХЖ2.092.098</Description>
+      <Name> Мачта телескопическая (12 м)</Name>
+    </element>
+    <element>
+      <Position>255</Position>
+      <Description>МКСИ.468324.003</Description>
+      <Name> Механизм подъема антенн МПА-2</Name>
+    </element>
+    <element>
+      <Position>257</Position>
+      <Description>МКСИ.468364.014</Description>
+      <Name> Блок  управления антеннами БУА</Name>
+    </element>
+    <element>
+      <Position>259</Position>
+      <Name> Принтер лазерный</Name>
+    </element>
+    <element>
+      <Position>261</Position>
+      <Description>ШКИС.311.712.122</Description>
+      <Name> Оттяжка антенная</Name>
+    </element>
+    <element>
+      <Position>262</Position>
+      <Description>ШКИС.311.712.122-01</Description>
+      <Name> Оттяжка антенная</Name>
+    </element>
+    <element>
+      <Position>263</Position>
+      <Description>ШКИС.311.712.122-02</Description>
+      <Name> Оттяжка антенная</Name>
+    </element>
+    <element>
+      <Position>271</Position>
+      <Name> УМК-1К</Name>
+    </element>
+    <element>
+      <Position>275</Position>
+      <Description>ИАЖЮ.201216.025</Description>
+      <Name> Очки ОН-3</Name>
+    </element>
+    <element>
+      <Position>301</Position>
+      <Description>ТДКЦ.323393.001</Description>
+      <Name> Чехол</Name>
+    </element>
+    <element>
+      <Position>302</Position>
+      <Description>ТДКЦ.434816.006-01</Description>
+      <Name> Усилитель антенный</Name>
+    </element>
+    <element>
+      <Position>303</Position>
+      <Description>ТДКЦ.434854.037</Description>
+      <Name> Антенна  низкопрофильная</Name>
+    </element>
+    <element>
+      <Position>304</Position>
+      <Description>ТДКЦ.436431.001</Description>
+      <Name> Устройство зарядное</Name>
+    </element>
+    <element>
+      <Position>305</Position>
+      <Description>ТДКЦ.436617.016</Description>
+      <Name> Адаптер сетевой</Name>
+    </element>
+    <element>
+      <Position>306</Position>
+      <Description>ТДКЦ.436617.017</Description>
+      <Name> Адаптер бортовой</Name>
+    </element>
+    <element>
+      <Position>307</Position>
+      <Description>ТДКЦ.469635.005</Description>
+      <Name> Приемник навигационный индивидуальный</Name>
+    </element>
+    <element>
+      <Position>308</Position>
+      <Description>ТДКЦ.563251.001</Description>
+      <Name> Батарея аккумуляторная</Name>
+    </element>
+    <element>
+      <Position>309</Position>
+      <Description>ТДКЦ.563251.004</Description>
+      <Name> Адаптер питания</Name>
+    </element>
+    <element>
+      <Position>321</Position>
+      <Description>ИТНЯ.468389.026-01</Description>
+      <Name> Блок управления и индикация  ПУДЛ</Name>
+    </element>
+    <element>
+      <Position>322</Position>
+      <Description>ИТНЯ.468389.027-01</Description>
+      <Name> Блок управления и индикация  ПУР</Name>
+    </element>
+    <element>
+      <Position>323</Position>
+      <Description>ИТНЯ.468351.122-01</Description>
+      <Name> Блок сопряжения МС1</Name>
+    </element>
+    <element>
+      <Position>324</Position>
+      <Description>ИТНЯ.468351.120-01</Description>
+      <Name> Блок сопряжения МС3</Name>
+    </element>
+    <element>
+      <Position>325</Position>
+      <Description>ИТНЯ.468351.137</Description>
+      <Name> Блок сопряжения МСНЧ</Name>
+    </element>
+    <element>
+      <Position>326</Position>
+      <Description>ИТНЯ.468351.135</Description>
+      <Name> Блок сопряжения МС5</Name>
+    </element>
+    <element>
+      <Position>327</Position>
+      <Description>ИТНЯ.468363.168</Description>
+      <Name> Блок БШМ</Name>
+    </element>
+    <element>
+      <Position>328</Position>
+      <Description>ИТНЯ.468363.146-02</Description>
+      <Name> Блок коммутации</Name>
+    </element>
+    <element>
+      <Position>329</Position>
+      <Description>ИТНЯ.467286.004</Description>
+      <Name> Блок громкоговорителя</Name>
+    </element>
+    <element>
+      <Position>330</Position>
+      <Description>ИТНЯ.436434.083</Description>
+      <Name> Источник вторичного электропитания ИП50В-12-АБ</Name>
+    </element>
+    <element>
+      <Position>331</Position>
+      <Description>ИТНЯ.468351.121-01</Description>
+      <Name> Блок сопряжения МС2</Name>
+    </element>
+    <element>
+      <Position>390</Position>
+      <Description>ИКМС.468363.001-10</Description>
+      <Name> Переключатель БВ6Д</Name>
+    </element>
+    <element>
+      <Position>391</Position>
+      <Description>УМЯИ.468624.024-05</Description>
+      <Name> Гарнитура ГВШ-Б-3-05</Name>
+    </element>
+    <element>
+      <Position>393</Position>
+      <Description>УМЯИ.468624.116</Description>
+      <Name> Микрофонно-телефонная трубка МТТ-2</Name>
+    </element>
+    <element>
+      <Description>**)- из комплекта аппаратуры</Description>
+      <Name> "Бриз"ТДКЦ.461513.054;</Name>
+    </element>
+  </section>
+  <section>
+    <name>Комплекты</name>
+    <element>
+      <Position>401</Position>
+      <Name> Комплект эксплуатационных документов по СКИД.461411.001 ВЭ</Name>
+    </element>
+    <element>
+      <Position>403</Position>
+      <Name> Комплект ЗИП-О по СКИД.461411.001 ЗИ</Name>
+    </element>
+    <element>
+      <Position>405</Position>
+      <Name> Комплект инструмента и принадлежностей</Name>
+    </element>
+    <element>
+      <Description>ИТНЯ.464425.033</Description>
+      <Name> Радиостанция Р-168 МР-А</Name>
+    </element>
+    <element>
+      <Description>ИТНЯ.468369.048-21</Description>
+      <Name> Программно-аппаратный комплекс АВСКУ</Name>
+    </element>
+    <element>
+      <Description>ИТНЯ.464511.028-07</Description>
+      <Name> Радиостанция Р-168-5УН(1)</Name>
+    </element>
+    <element>
+      <Description>ТДКЦ.461513.054</Description>
+      <Name> Аппаратура навигации "Бриз-КМ-И"</Name>
+    </element>
+    <element>
+      <Description>ЛУИЮ.466450.019РЭ</Description>
+      <Name> УПА-18</Name>
+    </element>
+    <element>
+      <Description>СКИД.466961.015</Description>
+      <Name> ИРК</Name>
+    </element>
+  </section>
+</specification>
